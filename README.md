@@ -22,6 +22,9 @@ Weather Condition with emoji ☀️🌧️❄️
 ✅ Dark/Light mode toggle
 ✅ Error handling and loading animations
 
+🌫️ Air Quality Index (AQI)
+   ✅ Display PM2.5, PM10, and overall air quality rating.
+
 🧭 APIs Used
 
 Geocoding API:
@@ -60,25 +63,13 @@ npm run preview
 
 🌎 Deployment
 
-You can easily deploy using:
-
-CodeSandbox
-
-StackBlitz
-
-GitHub Pages, Netlify, or Vercel
-
-If deploying from a repo, configure hosting to run:
+I Have deploy using: Sandbox (https://5mvwfy-5173.csb.app/)
 
 npm run build
 
 and serve the dist/ folder.
 
 💡 Future Enhancements
-
-🌫️ Air Quality Index (AQI)
-
-Display PM2.5, PM10, and overall air quality rating.
 
 🧥 Smart Clothing Suggestions
 
@@ -105,3 +96,4 @@ Styling: Tailwind CSS
 API: Open-Meteo
 
 Icons & Emojis: Native + Custom logics
+
