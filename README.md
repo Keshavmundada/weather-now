@@ -36,3 +36,4 @@ Notes:
 # weather-now4
 Weather Now 🌤️  Weather Now is a responsive web application that provides real-time weather information for any location. Built with Vite, React, and Tailwind CSS, it fetches live weather data from a public API and displays it in a clean, user-friendly interface.
 >>>>>>> 0a2b95af1af6f1a6ee3a8223590a69b5f87d0730
+
