@@ -43,7 +43,6 @@ export default function App() {
 
   const fetchLocationName = async (lat, lon) => {
     try {
-      // Use Nominatim reverse geocoding API
       const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`
       );
@@ -58,7 +57,6 @@ export default function App() {
         } else if (city) {
           return city;
         } else if (data.display_name) {
-          // Fallback to display name if specific fields not available
           const parts = data.display_name.split(',');
           return parts.slice(0, 2).join(',').trim();
         }
@@ -184,34 +182,34 @@ export default function App() {
   const weatherInfo = weather ? weatherCodeToCondition(weather.code) : null;
 
   return (
-    <div className={`min-h-screen bg-linear-to-br ${bgGradient} flex items-center justify-center p-6 transition-all duration-700`}>
+    <div className={`min-h-screen bg-gradient-to-br ${bgGradient} flex items-center justify-center p-4 sm:p-6 transition-all duration-700`}>
       <div className="w-full max-w-xl">
         {/* Header with Theme Toggle */}
-        <div className="text-center mb-10 relative">
+        <div className="text-center mb-6 sm:mb-10 relative">
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`absolute right-0 top-0 ${darkMode ? 'bg-slate-700 text-yellow-400' : 'bg-slate-200 text-slate-700'} p-3 rounded-full hover:scale-110 transition-all shadow-lg`}
+            className={`absolute right-0 top-0 ${darkMode ? 'bg-slate-700 text-yellow-400' : 'bg-slate-200 text-slate-700'} p-2 sm:p-3 rounded-full hover:scale-110 transition-all shadow-lg text-xl sm:text-2xl`}
             title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {darkMode ? "☀️" : "🌙"}
           </button>
 
-          <h1 className={`text-6xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'} tracking-tight mb-2 font-serif`}>
+          <h1 className={`text-4xl sm:text-6xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'} tracking-tight mb-2 font-serif`}>
             Weather Now
           </h1>
           <div className="flex justify-center gap-1 mb-3">
-            <div className={`h-px w-12 ${darkMode ? 'bg-slate-500' : 'bg-slate-400'}`}></div>
-            <div className={`h-px w-12 ${darkMode ? 'bg-slate-600' : 'bg-slate-300'}`}></div>
-            <div className={`h-px w-12 ${darkMode ? 'bg-slate-700' : 'bg-slate-200'}`}></div>
+            <div className={`h-px w-8 sm:w-12 ${darkMode ? 'bg-slate-500' : 'bg-slate-400'}`}></div>
+            <div className={`h-px w-8 sm:w-12 ${darkMode ? 'bg-slate-600' : 'bg-slate-300'}`}></div>
+            <div className={`h-px w-8 sm:w-12 ${darkMode ? 'bg-slate-700' : 'bg-slate-200'}`}></div>
           </div>
-          <p className={`${darkMode ? 'text-slate-400' : 'text-slate-600'} text-sm font-light tracking-widest uppercase`}>Real-time weather information</p>
+          <p className={`${darkMode ? 'text-slate-400' : 'text-slate-600'} text-xs sm:text-sm font-light tracking-widest uppercase px-4`}>Real-time weather information</p>
         </div>
 
         {/* Main Card */}
         <div className={`${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'} rounded-2xl shadow-lg overflow-hidden border transition-colors duration-700`}>
           {/* Search Section */}
-          <div className="p-8">
-            <div className="flex gap-3 mb-4">
+          <div className="p-4 sm:p-8">
+            <div className="flex flex-col sm:flex-row gap-3 mb-4">
               <input
                 className={`flex-1 ${darkMode ? 'bg-slate-700 border-slate-600 text-slate-100 placeholder-slate-400 focus:border-slate-500 focus:bg-slate-600' : 'bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-400 focus:border-slate-400 focus:bg-white'} border rounded-lg px-4 py-3 focus:outline-none transition-all text-base`}
                 placeholder="Enter city name..."
@@ -242,7 +240,7 @@ export default function App() {
 
           {/* Loading State */}
           {loading && (
-            <div className="p-16 text-center">
+            <div className="p-8 sm:p-16 text-center">
               <div className="inline-flex gap-2 mb-4">
                 <div className={`w-2 h-2 ${darkMode ? 'bg-slate-400' : 'bg-slate-400'} rounded-full animate-bounce`}></div>
                 <div className={`w-2 h-2 ${darkMode ? 'bg-slate-400' : 'bg-slate-400'} rounded-full animate-bounce`} style={{ animationDelay: "0.1s" }}></div>
@@ -254,7 +252,7 @@ export default function App() {
 
           {/* Error State */}
           {error && !loading && (
-            <div className="p-8">
+            <div className="p-4 sm:p-8">
               <div className={`${darkMode ? 'bg-red-900 border-red-700 text-red-200' : 'bg-red-50 border-red-200 text-red-700'} border px-4 py-3 rounded-lg text-sm`}>
                 {error}
               </div>
@@ -263,12 +261,12 @@ export default function App() {
 
           {/* Weather Display */}
           {weather && !loading && (
-            <div className="p-8">
+            <div className="p-4 sm:p-8">
               {/* Main Weather Info */}
-              <div className="text-center mb-8">
-                <div className="text-8xl mb-4">{weatherInfo.emoji}</div>
-                <h2 className={`text-3xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'} mb-2`}>{weather.place}</h2>
-                <p className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-sm font-light`}>
+              <div className="text-center mb-6 sm:mb-8">
+                <div className="text-6xl sm:text-8xl mb-4">{weatherInfo.emoji}</div>
+                <h2 className={`text-2xl sm:text-3xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'} mb-2 px-2`}>{weather.place}</h2>
+                <p className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-xs sm:text-sm font-light px-2`}>
                   {new Date(weather.time).toLocaleString('en-US', {
                     weekday: 'long',
                     month: 'long',
@@ -280,38 +278,38 @@ export default function App() {
               </div>
 
               {/* Temperature & Condition */}
-              <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-8 text-center mb-6 border`}>
-                <div className={`text-7xl font-extralight ${darkMode ? 'text-slate-100' : 'text-slate-800'} mb-2`}>
+              <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-6 sm:p-8 text-center mb-4 sm:mb-6 border`}>
+                <div className={`text-5xl sm:text-7xl font-extralight ${darkMode ? 'text-slate-100' : 'text-slate-800'} mb-2`}>
                   {Math.round(weather.temperature)}°
                 </div>
-                <div className={`text-xl ${darkMode ? 'text-slate-300' : 'text-slate-600'} font-light tracking-wide`}>
+                <div className={`text-lg sm:text-xl ${darkMode ? 'text-slate-300' : 'text-slate-600'} font-light tracking-wide`}>
                   {weatherInfo.condition}
                 </div>
               </div>
 
               {/* Weather Details */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-5 text-center border`}>
-                  <div className="text-3xl mb-2 opacity-60">💨</div>
-                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-xs font-light mb-2 uppercase tracking-wider`}>Wind</div>
-                  <div className={`text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>{weather.windspeed}</div>
-                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-xs mt-1 font-light`}>km/h</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-3 sm:p-5 text-center border`}>
+                  <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 opacity-60">💨</div>
+                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-[10px] sm:text-xs font-light mb-1 sm:mb-2 uppercase tracking-wider`}>Wind</div>
+                  <div className={`text-xl sm:text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>{weather.windspeed}</div>
+                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-[10px] sm:text-xs mt-1 font-light`}>km/h</div>
                 </div>
 
-                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-5 text-center border`}>
-                  <div className="text-3xl mb-2 opacity-60">💧</div>
-                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-xs font-light mb-2 uppercase tracking-wider`}>Humidity</div>
-                  <div className={`text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>
+                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-3 sm:p-5 text-center border`}>
+                  <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 opacity-60">💧</div>
+                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-[10px] sm:text-xs font-light mb-1 sm:mb-2 uppercase tracking-wider`}>Humidity</div>
+                  <div className={`text-xl sm:text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>
                     {weather.humidity !== null ? weather.humidity : "—"}
                   </div>
-                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-xs mt-1 font-light`}>%</div>
+                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-[10px] sm:text-xs mt-1 font-light`}>%</div>
                 </div>
 
-                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-5 text-center border`}>
-                  <div className="text-3xl mb-2 opacity-60">🧭</div>
-                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-xs font-light mb-2 uppercase tracking-wider`}>Direction</div>
-                  <div className={`text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>{weather.winddir}°</div>
-                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-xs mt-1 font-light`}>degrees</div>
+                <div className={`${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'} rounded-xl p-3 sm:p-5 text-center border`}>
+                  <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 opacity-60">🧭</div>
+                  <div className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-[10px] sm:text-xs font-light mb-1 sm:mb-2 uppercase tracking-wider`}>Direction</div>
+                  <div className={`text-xl sm:text-2xl font-light ${darkMode ? 'text-slate-100' : 'text-slate-800'}`}>{weather.winddir}°</div>
+                  <div className={`${darkMode ? 'text-slate-500' : 'text-slate-400'} text-[10px] sm:text-xs mt-1 font-light`}>degrees</div>
                 </div>
               </div>
             </div>
@@ -319,10 +317,10 @@ export default function App() {
 
           {/* Empty State */}
           {!weather && !loading && !error && (
-            <div className="p-16 text-center">
-              <div className="text-7xl mb-6 opacity-40">🌤️</div>
-              <h3 className={`text-xl font-light ${darkMode ? 'text-slate-300' : 'text-slate-700'} mb-3`}>Ready to Check Weather?</h3>
-              <p className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-sm font-light max-w-xs mx-auto leading-relaxed`}>
+            <div className="p-8 sm:p-16 text-center">
+              <div className="text-5xl sm:text-7xl mb-4 sm:mb-6 opacity-40">🌤️</div>
+              <h3 className={`text-lg sm:text-xl font-light ${darkMode ? 'text-slate-300' : 'text-slate-700'} mb-2 sm:mb-3 px-4`}>Ready to Check Weather?</h3>
+              <p className={`${darkMode ? 'text-slate-400' : 'text-slate-500'} text-xs sm:text-sm font-light max-w-xs mx-auto leading-relaxed px-4`}>
                 Enter a city name or use your location to view current weather conditions
               </p>
             </div>
@@ -330,7 +328,7 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8">
+        <div className="text-center mt-6 sm:mt-8">
           <p className={`${darkMode ? 'text-slate-500' : 'text-slate-500'} text-xs font-light tracking-wide`}>Powered by Open-Meteo API</p>
         </div>
       </div>
